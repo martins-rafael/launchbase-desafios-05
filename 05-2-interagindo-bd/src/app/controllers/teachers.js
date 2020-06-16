@@ -1,4 +1,3 @@
-const Intl = require('intl')
 const { age, graduation, date } = require('../../lib/utils')
 const Teacher = require('../models/Teacher')
 
@@ -22,7 +21,6 @@ module.exports = {
         Teacher.create(req.body, function (teacher) {
             return res.redirect(`/teachers/${teacher.id}`)
         })
-
     },
     show(req, res) {
         Teacher.find(req.params.id, function (teacher) {
