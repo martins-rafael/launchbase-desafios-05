@@ -12,6 +12,13 @@ module.exports = {
             calback(results.rows)
         })
     },
+    teacherSelectOptions(callback) {
+        db.query(`SELECT name, id FROM teachers`, function(err, results) {
+            if (err) `Database error! ${err}`
+
+            callback(results.rows)
+        })
+    },
     create(data, callback) {
         const query = `
         INSERT INTO students (
@@ -20,8 +27,9 @@ module.exports = {
             email,
             birth_date,
             education_level,
-            weekly_classes
-        ) VALUES ($1, $2, $3, $4, $5, $6)
+            weekly_classes,
+            teacher_id
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7)
         RETURNING id
         `
 
@@ -31,7 +39,8 @@ module.exports = {
             data.email,
             date(data.birth_date).iso,
             data.education_level,
-            data.weekly_classes
+            data.weekly_classes,
+            data.teacher
         ]
 
         db.query(query, values, function (err, results) {
@@ -42,9 +51,10 @@ module.exports = {
     },
     find(id, callback) {
         db.query(`
-        SELECT *
+        SELECT students.*, teachers.name AS teacher_name
         FROM students
-        WHERE id = $1`, [id], function (err, results) {
+        LEFT JOIN teachers ON (teachers.id = students.teacher_id)
+        WHERE students.id = $1`, [id], function (err, results) {
             if (err) throw `Database error! ${err}`
 
             callback(results.rows[0])
@@ -58,8 +68,9 @@ module.exports = {
             email=($3),
             birth_date=($4),
             education_level=($5),
-            weekly_classes=($6)
-        WHERE id = $7
+            weekly_classes=($6),
+            teacher_id=($7)
+        WHERE id = $8
         `
 
         const values = [
@@ -69,6 +80,7 @@ module.exports = {
             date(data.birth_date).iso,
             data.education_level,
             data.weekly_classes,
+            data.teacher,
             data.id
         ]
 

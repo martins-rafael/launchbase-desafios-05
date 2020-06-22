@@ -45,4 +45,16 @@
             <input type="number" name="weekly_classes" placeholder="Digite somente o número" value="{{student.weekly_classes}}">
         </div>
     </div>
+    <div class="item">
+        <div>Professor</div>
+        <div>
+            <select name="teacher">
+                {% for teacher in teachersOption %}
+                    <option value="{{teacher.id}}" {% if student.teacher_id == teacher.id %} selected="selected" {% endif %}>
+                        {{teacher.name}}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
 </div>
