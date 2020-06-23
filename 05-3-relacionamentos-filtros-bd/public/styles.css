@@ -185,7 +185,8 @@ a.button {
     cursor: pointer;
 }
 
-button#create-btn {
+button#create-btn,
+button#filter-btn {
     width: 100%;
 }
 
@@ -208,7 +209,7 @@ button.delete-btn[type="submit"] {
 .table-container {
     display: block;
     box-sizing: border-box;
-    padding: 8px 40px 40px;
+    padding: 40px;
 }
 
 .table-container table {
@@ -269,4 +270,34 @@ tr a.button {
     width: initial;
     font-size: 14px;
     text-transform: uppercase;
+}
+
+.table-container .header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.table-container .header a {
+    margin: 0;
+    width: 120px;
+}
+
+.table-container .header form {
+    display: grid;
+    grid-template-columns: 1fr 120px;
+    gap: 8px;
+    align-items: center;
+}
+
+.table-container .header form input {
+    box-sizing: border-box;
+    padding: 7px 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.table-container .header button {
+    margin: 0;
 }
