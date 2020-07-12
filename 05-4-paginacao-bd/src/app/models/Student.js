@@ -1,5 +1,6 @@
 const { date } = require('../../lib/utils')
 const db = require('../../config/db')
+const { query, off } = require('../../config/db')
 
 module.exports = {
     all(calback) {
@@ -13,8 +14,8 @@ module.exports = {
         })
     },
     teacherSelectOptions(callback) {
-        db.query(`SELECT name, id FROM teachers`, function(err, results) {
-            if (err) `Database error! ${err}`
+        db.query(`SELECT name, id FROM teachers`, function (err, results) {
+            if (err)`Database error! ${err}`
 
             callback(results.rows)
         })
@@ -95,6 +96,40 @@ module.exports = {
             if (err) throw `Database error! ${err}`
 
             callback()
+        })
+    },
+    paginate(params) {
+        const { filter, limit, offset, callback } = params
+
+        let query = '',
+            filterQuery = '',
+            totalQuery = `(
+                SELECT count(*) FROM students
+            ) AS total`
+
+        if (filter) {
+            filterQuery = `
+            WHERE students.name ILIKE '%${filter}%'
+            OR students.email ILIKE '%${filter}%'
+            `
+
+            totalQuery = `(
+                SELECT count(*) FROM students
+            ) AS total`
+        }
+
+        query = `
+        SELECT students.*, ${totalQuery}
+        FROM students
+        ${filterQuery}
+        ORDER by name ASC
+        LIMIT $1 OFFSET $2
+        `
+
+        db.query(query, [limit, offset], function (err, results) {
+            if (err) throw `Database error! ${err}`
+
+            callback(results.rows)
         })
     }
 }
