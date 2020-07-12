@@ -207,7 +207,8 @@ button.delete-btn[type="submit"] {
 ============ */
 
 .table-container {
-    display: block;
+    display: grid;
+    grid-template: 64px 1fr 16px / 1fr;
     box-sizing: border-box;
     padding: 40px;
 }
@@ -272,11 +273,16 @@ tr a.button {
     text-transform: uppercase;
 }
 
+/* ==============
+==== FILTERS ====
+============== */
+
 .table-container .header {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    margin-bottom: 32px;
+    margin: 0;
+    align-self: start;
 }
 
 .table-container .header a {
@@ -300,4 +306,26 @@ tr a.button {
 
 .table-container .header button {
     margin: 0;
+}
+
+/* =================
+==== PAGINATION ====
+================= */
+
+.table-container .pagination {
+    align-self: end;
+    justify-self: center;
+    margin: 0;
+}
+
+.pagination a,
+.pagination span {
+    margin: 0 8px;
+    text-decoration: none;
+    color: var(--primary-color);
+}
+
+.pagination a:hover {
+    filter: brightness(.3);
+    border-bottom: 1px solid var(--primary-color);
 }

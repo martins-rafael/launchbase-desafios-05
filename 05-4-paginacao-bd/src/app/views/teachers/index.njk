@@ -3,12 +3,13 @@
 {% block content %}
     <div class="card table-container">
         <div class="header">
-        <a href="/teachers/create" class="button">Novo</a>
-        <form action="/teachers">
-            <input type="text" name="filter" value="{{filter}}" placeholder="Nome ou área de atuação">
-            <button id="filter-btn" type="submit">Filtrar</button>
-        </form>
+            <a href="/teachers/create" class="button">Novo</a>
+            <form action="/teachers">
+                <input type="text" name="filter" value="{{filter}}" placeholder="Nome ou área de atuação">
+                <button id="filter-btn" type="submit">Filtrar</button>
+            </form>
         </div>
+
         <table width="100%">
             <thead>
                 <tr>
@@ -26,7 +27,9 @@
                             {{teacher.name}}
                         </td>
                         <td>
-                            {% for subject in teacher.subjects_taught.split(',') %}
+                            {% for subject in teacher
+                                .subjects_taught
+                                .split(',') %}
                                 <span class="services">{{subject}}</span>
                             {% endfor %}
                         </td>
@@ -38,5 +41,11 @@
                 {% endfor %}
             </tbody>
         </table>
+
+        <div class="pagination"
+        data-total={{pagination.total}}
+        data-page={{pagination.page}}
+        data-filter={{filter}}
+        ></div>
     </div>
 {% endblock content %}
