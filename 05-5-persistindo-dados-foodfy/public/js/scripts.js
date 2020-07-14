@@ -9,7 +9,7 @@ for (let item of menuItens) {
 }
 
 // Redirect to recipe
-const recipes = document.querySelectorAll('.recipe')
+const recipes = document.querySelectorAll('.recipe-container .recipe')
 
 for (let recipe of recipes) {
     recipe.addEventListener('click', function () {
@@ -19,7 +19,7 @@ for (let recipe of recipes) {
 }
 
 // Hide recipe content
-const recipeWrapers = document.querySelectorAll('.recipe-wraper')
+const recipeWrapers = document.querySelectorAll('.recipe-hide')
 
 for (let wraper of recipeWrapers) {
     const hide = wraper.querySelector('.hide')

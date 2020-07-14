@@ -16,6 +16,7 @@ module.exports = {
     },
     show(req, res) {
         Recipe.find(req.params.id, function (recipe) {
+            if(!recipe) return res.send('Receita não encontrada!')
             
             return res.render('main/show', { recipe })
         })

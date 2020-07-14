@@ -151,7 +151,8 @@ section.most-popular {
 ==== recipes ==== 
 ============== */
 
-.recipe-container {
+.recipe-container,
+.recipe-container-adm {
     display: -ms-grid;
     display: grid;
     -ms-grid-columns: 1fr 20px 1fr 20px 1fr;
@@ -270,7 +271,7 @@ form .title,
     margin-top: 40px;
 }
 
-.recipes-admin .recipe-container {
+.recipes-admin .recipe-container-adm {
     -ms-grid-columns: 1fr 20px 1fr;
     grid-template-columns: 1fr 1fr;
     gap: 20px;

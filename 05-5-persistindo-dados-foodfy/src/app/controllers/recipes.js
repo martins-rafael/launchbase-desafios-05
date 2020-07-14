@@ -20,7 +20,7 @@ module.exports = {
         }
 
         Recipe.create(req.body, function (recipe) {
-            return res.redirect(`recipes/${recipe.id}`)
+            return res.redirect(`/admin/recipes/${recipe.id}`)
         })
     },
     show(req, res) {
@@ -31,12 +31,11 @@ module.exports = {
         })
     },
     edit(req, res) {
-        const recipeIndex = req.params.index
-        const recipe = {
-            ...data.recipes[recipeIndex],
-            index: recipeIndex
-        }
-        return res.render('admin/recipes/edit', { recipe })
+        Recipe.find(req.params.id, function (recipe) {
+            Recipe.chefsSelectOptions(function (chefsOptions) {
+                return res.render('admin/recipes/edit', { recipe, chefsOptions })
+            })
+        })
     },
     put(req, res) {
         const recipeIndex = req.params.index
@@ -46,22 +45,13 @@ module.exports = {
             if (req.body[key] == '')
                 return res.send('Por favor, preencha todos os campos.')
         }
-
-        data.recipes[recipeIndex] = { ...req.body }
-
-        fs.writeFile('data.json', JSON.stringify(data, null, 2), function (err) {
-            if (err) return res.send('Write file error!')
-            return res.redirect(`/admin/recipes/${recipeIndex}`)
+        Recipe.update(req.body, function () {
+            res.redirect(`/admin/recipes/${req.body.id}`)
         })
     },
     delete(req, res) {
-        const recipeIndex = req.params.index
-
-        data.recipes.splice(recipeIndex, 1)
-
-        fs.writeFile('data.json', JSON.stringify(data, null, 2), function (err) {
-            if (err) return res.send('Write file error!')
-            return res.redirect('/admin/recipes')
+        Recipe.delete(req.body.id, function(){
+            return res.redirect('/admin')
         })
     }
 }
