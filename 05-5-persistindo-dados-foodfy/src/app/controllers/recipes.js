@@ -33,6 +33,8 @@ module.exports = {
     edit(req, res) {
         Recipe.find(req.params.id, function (recipe) {
             Recipe.chefsSelectOptions(function (chefsOptions) {
+                if (!recipe) res.send('Receita não encontrada!')
+
                 return res.render('admin/recipes/edit', { recipe, chefsOptions })
             })
         })
@@ -50,7 +52,7 @@ module.exports = {
         })
     },
     delete(req, res) {
-        Recipe.delete(req.body.id, function(){
+        Recipe.delete(req.body.id, function () {
             return res.redirect('/admin')
         })
     }
