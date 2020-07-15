@@ -1,4 +1,4 @@
-// Active menu
+// Active menu //
 const currentPage = location.pathname
 const menuItens = document.querySelectorAll('header .links a')
 
@@ -8,7 +8,7 @@ for (let item of menuItens) {
     }
 }
 
-// Redirect to recipe
+// Redirect to recipe //
 const recipes = document.querySelectorAll('.recipe-container .recipe')
 
 for (let recipe of recipes) {
@@ -18,7 +18,7 @@ for (let recipe of recipes) {
     })
 }
 
-// Hide recipe content
+// Hide recipe content //
 const recipeWrapers = document.querySelectorAll('.recipe-hide')
 
 for (let wraper of recipeWrapers) {
@@ -34,25 +34,34 @@ for (let wraper of recipeWrapers) {
     })
 }
 
-// Confirm deletion
-const formDelete = document.querySelector('#form-delete')
-
-if (formDelete) {
-    const totalRecipes = document.querySelector('.total-recipes')
-    const total = +totalRecipes.dataset.total
-
-    if (total) {
-        formDelete.addEventListener('submit', function (event) {
-            event.preventDefault()
-            alert('Não é possivel deletar chefs que possuem receitas!')
-        })
-    } else {
-        formDelete.addEventListener('submit', function (event) {
+// Confirm recipe/chef deletion //
+function confirmDelete(formDelete) {
+    formDelete.addEventListener('submit', function (event) {
+        // Confirm chef has recipes //
+        const totalRecipes = document.querySelector('.total-recipes')
+        if (totalRecipes) {
+            const total = +totalRecipes.dataset.total
+            if (total) {
+                event.preventDefault()
+                alert('Não é possivel deletar chefs que possuem receitas!')
+            } else {
+                const confirmation = confirm('Deseja Deletar?')
+                if (!confirmation) {
+                    event.preventDefault()
+                }
+            }
+            // Confirm recipe deletion //
+        } else {
             const confirmation = confirm('Deseja Deletar?')
             if (!confirmation) {
                 event.preventDefault()
             }
-        })
-    }
-    console.log(`Esse chef possui ${total} receitas.`)
+        }
+    })
+}
+
+const formDelete = document.querySelector('#form-delete')
+
+if (formDelete) {
+    confirmDelete(formDelete)
 }
