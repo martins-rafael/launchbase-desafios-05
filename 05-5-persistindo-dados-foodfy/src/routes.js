@@ -8,7 +8,9 @@ const chefs = require('./app/controllers/chefs')
 routes.get('/', main.index)
 routes.get('/about', main.about)
 routes.get('/recipes', main.recipes)
-routes.get('/recipes/:id', main.show)
+routes.get('/recipes/:id', main.showRecipe)
+routes.get('/chefs', main.chefs)
+routes.get('/chefs/:id', main.showChef)
 
 // Admin
 routes.get('/admin', function (req, res) {

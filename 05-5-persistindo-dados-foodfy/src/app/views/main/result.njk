@@ -1,0 +1,21 @@
+{% extends 'layouts/main.njk' %}
+
+{% block head %}
+    <title>Buscando por "{{search}}" | Foodfy</title>
+{% endblock %}
+
+{% block content %}
+    <section class="container">
+        <h2>Buscando por "{{search}}"</h2>
+        <div class="recipe-container">
+            {% for recipe in recipes %}
+            <div class="recipe"
+            data-id={{recipe.id}}>
+                <img src="{{recipe.image}}" alt="imagem de {{recipe.title}}">
+                <h3>{{recipe.title}}</h3>
+                <p>por {{recipe.chef_name}}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

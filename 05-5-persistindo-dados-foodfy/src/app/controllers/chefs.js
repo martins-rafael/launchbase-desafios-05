@@ -30,7 +30,7 @@ module.exports = {
                 }
 
                 return res.render('admin/chefs/show', { chef, recipes })
-                
+
             })
         })
     },
@@ -49,12 +49,12 @@ module.exports = {
                 return res.send('Por favor, preencha todos os campos.')
         }
 
-        Chef.update(req.body, function() {
+        Chef.update(req.body, function () {
             return res.redirect(`/admin/chefs/${req.body.id}`)
         })
     },
     delete(req, res) {
-        Chef.delete(req.body.id, function(){
+        Chef.delete(req.body.id, function () {
             res.redirect('/admin/chefs')
         })
     }

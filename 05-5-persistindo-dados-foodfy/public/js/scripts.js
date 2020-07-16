@@ -8,15 +8,25 @@ for (let item of menuItens) {
     }
 }
 
-// Redirect to recipe //
-const recipes = document.querySelectorAll('.recipe-container .recipe')
-
-for (let recipe of recipes) {
-    recipe.addEventListener('click', function () {
-        const id = recipe.dataset.id
-        window.location.href = `/recipes/${id}`
-    })
+// Redirect to recipe/chef //
+function redirectTo(collection) {
+    for (let item of collection) {
+        item.addEventListener('click', function () {
+            const id = item.dataset.id
+            if (collection == recipes) {
+                window.location.href = `/recipes/${id}`
+            } else {
+                window.location.href = `/chefs/${id}`
+            }
+        })
+    }
 }
+
+const recipes = document.querySelectorAll('.recipe-container .recipe')
+const chefs = document.querySelectorAll('.chef-container .chef')
+
+redirectTo(recipes)
+redirectTo(chefs)
 
 // Hide recipe content //
 const recipeWrapers = document.querySelectorAll('.recipe-hide')

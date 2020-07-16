@@ -35,9 +35,9 @@ body {
 header .container {
     display: -ms-grid;
     display: grid;
-    -ms-grid-columns: 1fr 2fr;
-    grid-template-columns: 1fr 2fr;
-    padding: 40px;
+    grid-template-columns: 92px 1fr 1fr;
+    align-items: center;
+    padding: 20px 0;
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
 }
@@ -49,15 +49,53 @@ header .img-wraper img {
 header .links ul {
     display: -ms-grid;
     display: grid;
-    -ms-grid-columns: 1fr 4fr;
-    grid-template-columns: 1fr 4fr;
+    -ms-grid-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    max-width: 300px;
     list-style: none;
 }
 
-header .links ul li a {
+header .links a {
+    position: relative;
     font-size: 16px;
     text-decoration: none;
     color: var(--default-black);
+    transition: .2s;
+}
+
+.links a:hover {
+    font-weight: bold;
+}
+
+.links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--default-black);
+    opacity: 0;
+    border-radius: 10px;
+    transition: all .2s ease;
+}
+
+.links a:hover::after {
+    opacity: 1;
+    bottom: -6px;
+}
+
+header .container .filter-form {
+    display: grid;
+    grid-template-columns: 248px 96px;
+    gap: 16px;
+    justify-self: end;
+}
+
+header .container .filter-form button {
+    align-self: center;
+    height: 40px;
 }
 
 header.header-admin {
@@ -125,7 +163,7 @@ section.banner {
 }
 
 section.most-popular {
-    margin-top: 56px;
+    margin-top: 40px;
 }
 
 /* =================
@@ -176,7 +214,8 @@ section.most-popular {
     font-weight: normal;
 }
 
-.recipe p {
+.recipe p,
+.chef p {
     margin: 0 10px;
     font-size: 14px;
     color: var(--gray);
@@ -377,33 +416,38 @@ form .add {
     cursor: pointer;
 }
 
-.chef-img img {
-    display: block;
-    margin: 56px auto 0;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-}
-
-.admin .chef-container-admin {
+.chef-container,
+.chef-container-admin {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 20px;
     margin-top: 24px;
 }
 
-.admin .chef {
+.chef-container .chef{
+    cursor: pointer;
+}
+
+.chef {
     display: grid;
     grid-template-columns: 30% 70%;
     align-items: center;
 }
 
-.admin .chef img {
+.chef img {
     width: 64px;
     height: 64px;
     border-radius: 64px;
 }
 
-.admin .chef a {
+.chef a {
     margin-top: 0;
+}
+
+.chef-img img {
+    display: block;
+    margin: 56px auto 0;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
 }
