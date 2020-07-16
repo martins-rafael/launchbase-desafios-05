@@ -37,15 +37,11 @@ module.exports = {
     },
     showChef(req, res) {
         Chef.find(req.params.id, function (chef) {
-            if (!chef) res.send('Chef não encontrado!')
             Chef.chefRecipes(req.params.id, function (recipes) {
-                if (!recipes) {
-                    return res.render('main/chef', { chef })
-                }
+                if (!chef) res.send('Chef não encontrado!')
 
                 return res.render('main/chef', { chef, recipes })
             })
-
         })
     }
 }

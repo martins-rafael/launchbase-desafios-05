@@ -16,7 +16,7 @@ module.exports = {
     },
     chefRecipes(id, callback) {
         db.query(`
-        SELECT *
+        SELECT recipes.*
         FROM recipes
         LEFT JOIN chefs ON (chefs.id = recipes.chef_id)
         WHERE chefs.id = $1`, [id], function (err, results) {
