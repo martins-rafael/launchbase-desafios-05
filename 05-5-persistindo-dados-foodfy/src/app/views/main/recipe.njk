@@ -4,6 +4,13 @@
     <title>{{recipe.title}} | Foodfy</title>
 {% endblock %}
 
+{% block search %}
+    <form class="filter-form" action="/" method="GET">
+        <input type="text" name="search" value="{{search}}" placeholder="Buscar uma receita">
+        <button type="submit">Buscar</button>
+    </form>
+{% endblock %}
+
 {% block content %}
     <section class="selected container">
         <img src="{{recipe.image}}" alt="imagem de {{recipe.title}}">

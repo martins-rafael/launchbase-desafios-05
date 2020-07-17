@@ -93,6 +93,10 @@ header .container .filter-form {
     justify-self: end;
 }
 
+header .container .filter-form input {
+    margin: 0;
+}
+
 header .container .filter-form button {
     align-self: center;
     height: 40px;
@@ -363,7 +367,7 @@ a.btn {
 
 form button:hover, 
 .btn:hover {
-    filter: brightness(1.1);
+    filter: brightness(1.03);
     box-shadow: 0 2px 6px -1px var(--purple);
 }
 
@@ -373,7 +377,7 @@ button.btn-delete {
 }
 
 button.btn-delete:hover {
-    filter: brightness(1.1);
+    filter: brightness(1.03);
     box-shadow: 0 2px 6px -1px #dc4747;
 }
 
@@ -402,6 +406,12 @@ form input, form textarea, form select {
     height: 40px;
     border: 1px solid #ddd;
     border-radius: 4px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    box-shadow: 0px 0px 2px #ccc;
 }
 
 form textarea {

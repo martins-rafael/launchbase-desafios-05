@@ -4,6 +4,13 @@
     <title>Buscando por "{{search}}" | Foodfy</title>
 {% endblock %}
 
+{% block search %}
+    <form class="filter-form" action="/" method="GET">
+        <input type="text" name="search" value="{{search}}" placeholder="Buscar uma receita">
+        <button type="submit">Buscar</button>
+    </form>
+{% endblock %}
+
 {% block content %}
     <section class="container">
         <h2>Buscando por "{{search}}"</h2>
