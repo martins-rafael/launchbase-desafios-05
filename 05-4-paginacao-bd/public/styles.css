@@ -254,6 +254,10 @@ tbody tr td:first-child span {
     box-shadow: 3px 1px 6px -4px #000;
 }
 
+tbody tr td:nth-of-type(3) {
+    text-align: center;
+}
+
 tr a.button {
     margin: 0;
     font-size: 14px;
